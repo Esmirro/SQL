@@ -1,2 +1,3 @@
 # SQL
-<img width="1271" height="822" alt="image" src="https://github.com/user-attachments/assets/7ae674f7-751f-4198-be86-9cf80aaa38ea" />
+
+<img width="800" height="520" alt="image" src="https://github.com/user-attachments/assets/f8dd5d23-ce48-4f8f-91c7-3036e1d1aa8e" />
