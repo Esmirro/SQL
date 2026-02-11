@@ -25,11 +25,11 @@ select  *
 from  film f 
 order  by  f.length  asc;
 
--- 6.  Encuentra el nombre y apellido de los actores que tengan ‘Allen’ en su apellido.
+-- 6. Encuentra el nombre y apellido de los actores que tengan ‘Allen’ en su apellido.
 
-select  a.first_name , a.last_name 
-from	actor a 
-where	a.last_name  like 'ALLEN';
+select  a.first_name, a.last_name
+from    actor a
+where   a.last_name like '%ALLEN%';
 
 -- 7. Encuentra la cantidad total de películas en cada clasificación de la tabla “film” y muestra la clasificación junto con el recuento.
 
@@ -133,8 +133,9 @@ having avg(f.length) > 110;
 
 -- 21. ¿Cuál es la media de duración del alquiler de las películas?
 
-select	avg(f.rental_duration ) as media_duracion_alquiler
-FROM film f ;
+select avg((r.return_date::date - r.rental_date::date)) as media_duracion_alquiler_dias
+from rental r
+where r.return_date is not null;
 
 -- 22. Crea una columna con el nombre y apellidos de todos los actores y actrices.
 
@@ -288,11 +289,10 @@ where first_name = 'JOHNNY';
 
 -- 36. Renombra la columna “first_name” como Nombre y “last_name” como Apellido.
 
-alter table actor 
-rename column first_name to nombre;
-
-alter table actor
-rename column last_name to apellido;
+select
+first_name as nombre,
+last_name as apellido
+from actor;
 
 -- 37. Encuentra el ID del actor más bajo y más alto en la tabla actor.
 
@@ -321,11 +321,12 @@ limit 5;
 -- 41. Agrupa los actores por su nombre y cuenta cuántos actores tienen el mismo nombre. ¿Cuál es el nombre más repetido?
 
 select
-nombre,
+first_name as nombre,
 count(*) as total_actores
 from actor
-group by nombre
-order by total_actores desc;
+group by first_name
+order by total_actores desc
+limit 1;
 
 -- 42. Encuentra todos los alquileres y los nombres de los clientes que los realizaron.
 
